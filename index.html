@@ -1,0 +1,245 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;700&display=swap" rel="stylesheet">
+    <title>VTT Editor</title>
+</head>
+<body>
+    
+    <div class="div fileUpload">
+        <label for="fileToLoad" class="custom-file-upload">Upload a file</label>
+        <input type="file" id="fileToLoad">
+        <span id="fileLoadErrMsg"></span>
+    </div>
+    
+
+    <div id="displayOnLoad" class="div" style="display: block;">
+        <div>
+            <div class="instructions">
+                <p>Enter a time in the format HH:MM:SS, e.g. '00:12:55'</p>
+                <p>Use the arrows to change the transcript timing.</p>
+            </div>
+            <div id="time-editor">
+                <span class="arrow-button" onclick="shiftTimeBack()" style="cursor: pointer;"><<</span>
+                <input id="number" type="text" name="timeInput"  title="HH:MM:SS" placeholder="00:00:00" onkeyup="formatTime(this)" maxlength="8" accept="text/vtt">
+                <span class="arrow-button" onclick="shiftTimeForward()" style="cursor: pointer;">>></span>
+                <span id="errMsg"></span>
+            </div>
+            <textarea id="inputTextToSave" rows="10"></textarea>
+        </div>
+    </div>
+
+    <div class="download-area">
+        <label for="inputFileNameToSaveAs">New file name:</label>
+        <input id="inputFileNameToSaveAs"></input>
+        <button onclick="saveTextAsFile()">Save Text to File</button>
+    </div>
+    
+    
+    
+    <br>
+    <p id="content"></p>
+        <script type="text/javascript">
+
+        function saveTextAsFile() {
+            var textToSave = document.getElementById("inputTextToSave").value;
+            var textToSaveAsBlob = new Blob([textToSave], {type:"text/vtt"});
+            var textToSaveAsURL = window.URL.createObjectURL(textToSaveAsBlob);
+            var fileNameToSaveAs = document.getElementById("inputFileNameToSaveAs").value;
+
+            var downloadLink = document.createElement("a");
+            downloadLink.download = fileNameToSaveAs;
+            downloadLink.innerHTML = "Download File";
+            downloadLink.href = textToSaveAsURL;
+            downloadLink.onclick = destroyClickedElement;
+            downloadLink.style.display = "none";
+            document.body.appendChild(downloadLink);
+
+            downloadLink.click();
+        }
+
+        function destroyClickedElement(event) {
+            document.body.removeChild(event.target);
+        }
+
+        function loadFileAsText() {
+            var fileToLoad = document.getElementById("fileToLoad").files[0];
+
+            var fileReader = new FileReader();
+            fileReader.onload = function(fileLoadedEvent) {
+                var textFromFileLoaded = fileLoadedEvent.target.result;
+                document.getElementById("inputTextToSave").value = textFromFileLoaded;
+            };
+            fileReader.readAsText(fileToLoad, "UTF-8");
+        }
+
+        const upload = document.getElementById('fileToLoad');
+        const re = /(?:[01]\d|2[0-3]):(?:[0-5]\d):(?:[0-5]\d)/g
+        const timeInput = document.getElementsByName("timeInput")[0]
+        let outputbx = document.getElementById('inputTextToSave');
+        let fr = new FileReader();
+        let fileText;
+        let modifiedFileText;
+        let inputTime;
+        let fileTextTimes;
+        let modifiedTimes;
+
+        upload.addEventListener('change', () => {
+            
+            fr.onload = function() {
+                
+                fileText = fr.result;
+                outputbx.innerHTML = fileText;
+                
+                document.getElementById("displayOnLoad").style.display = "block";
+
+                fileTextTimes = fileText.match(re);
+                console.log(upload.files[0].type)
+            }
+
+            fr.readAsText(upload.files[0]);
+            if(upload.files[0].type != 'text/vtt', 'text/plain') {
+                    console.log('wrong file type')
+                    return
+                }
+            
+        })
+
+        timeInput.addEventListener('change', () => {
+            inputTime = timeInput.value
+        });
+        
+        
+        function shiftTimeBack() {
+            
+            let newText = outputbx.innerHTML;
+            fileTextTimes = newText.match(re);
+            modifiedTimes = fileTextTimes.map(t => subtractTimes(t, inputTime))
+
+            // if (fileTextTimes[0] < inputTime) {
+            //     console.log('Change number is too large to subtract.')
+            //     return
+            // }
+
+            let timesObj = {}
+            fileTextTimes.forEach((t, i)=>timesObj[t] = modifiedTimes[i])
+
+            console.log(timesObj)
+            
+            for (var key in timesObj) {
+                
+                if(!timesObj.hasOwnProperty(key)) {
+                    continue;
+                }
+                newText = newText.replace(key, timesObj[key]);
+            }
+            outputbx.innerHTML = newText;
+        }
+
+        function shiftTimeForward() {
+            let newText = outputbx.innerHTML;
+            fileTextTimes = newText.match(re);
+            modifiedTimes = fileTextTimes.map(t => addTimes(t, inputTime))
+
+            let timesObj = {}
+            fileTextTimes.forEach((t, i)=>timesObj[t] = modifiedTimes[i])
+
+            console.log(timesObj)
+            
+            
+            for (var key in timesObj) {
+                
+                if(!timesObj.hasOwnProperty(key)) {
+                    continue;
+                }
+                newText = newText.replace(key, timesObj[key]);
+            }
+            outputbx.innerHTML = newText;
+        }
+
+        function timeToSec(time) {
+            var b = time.split(':');
+            return b[0]*60*60 + b[1]*60 + +b[2];
+        }
+
+        function timeFromSec(sec) {
+            function z(n) {return (n<10? '0':'') + n;}
+            var h = (sec/3600 |0) % 24;
+            var m = (sec % 3600)/60|0;
+            var s = sec % 60
+            return z(h) + ':' + z(m) + ':' + z(s);
+        }
+
+        function subtractTimes(t0, t1) {
+            return timeFromSec(timeToSec(t0) - timeToSec(t1));
+        }
+
+        function addTimes(t0, t1) {
+            return timeFromSec(timeToSec(t0) + timeToSec(t1));
+        }
+
+
+        function formatTime(timeInput) {
+
+            intValidNum = timeInput.value;
+
+            console.log(intValidNum)
+
+            if (intValidNum === 1) {
+                timeInput.value = "";
+                return false;
+            }
+
+            if (intValidNum < 24) {
+                if (intValidNum.length == 2) {
+                    timeInput.value = timeInput.value + ":";
+                    return false;
+                }
+            }
+            if (intValidNum == 24) {
+                if (intValidNum.length == 2) {
+                    timeInput.value = timeInput.value.length - 2 + "0:";
+                    return false;
+                }
+            }
+            if (intValidNum > 24) {
+                if (intValidNum.length == 2) {
+                    timeInput.value = "";
+                    return false;
+                }
+            }
+
+            if (intValidNum.length == 5 && intValidNum.slice(-2) < 60) {
+                timeInput.value = timeInput.value + ":";
+                return false;
+            }
+            if (intValidNum.length == 5 && intValidNum.slice(-2) > 60) {
+                timeInput.value = timeInput.value.slice(0, 2) + ":";
+                return false;
+            }
+            if (intValidNum.length == 5 && intValidNum.slice(-2) == 60) {
+                timeInput.value = timeInput.value.slice(0, 2) + ":00:";
+                return false;
+            }
+
+
+            if (intValidNum.length == 8 && intValidNum.slice(-2) > 60) {
+                timeInput.value = timeInput.value.slice(0, 5) + ":";
+                return false;
+            }
+            if (intValidNum.length == 8 && intValidNum.slice(-2) == 60) {
+                timeInput.value = timeInput.value.slice(0, 5) + ":00";
+                return false;
+            }
+
+        } //end function
+        
+        </script>
+
+</body>
+</html>
