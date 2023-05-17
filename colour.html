@@ -24,16 +24,6 @@
             background: linear-gradient(20deg, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0), rgba(52, 90, 139, 0.5));
         }
 
-        #week-line {
-            position: absolute;
-            top: 0;
-            right: 0;
-            background-color: darkorange;
-            height: clamp(3px,.35vw, 5px);
-            width: 100%;
-        
-        }
-
         #date {
             text-align: right; 
             font-size: clamp(8pt, 2vw, 10pt); 
@@ -45,8 +35,21 @@
             text-align: right; 
             font-size: clamp(10pt, 2vw, 12pt); 
             color: white; 
-            margin: calc(4px + .5vw) 1vw 0 0;
+            margin: calc(2px + .5vw) 1vw 0 0;
             font-weight: bold;
+        }
+
+        #week-line {
+            display: flex; 
+            justify-content: flex-end;
+            align-items: stretch;
+            gap: 3px;
+        }
+
+        #week-line > div {
+            background-color: rgb(255, 140, 0);
+            height: clamp(4px,.35vw, 5px);
+            width: 7.69%
         }
     </style>
    
@@ -83,28 +86,28 @@
 
        //detectDeviceType();
     
-       function adjustDivWidth(week) {
-            var maxWidthPercentage = 100; // Maximum width of the div in percentage
-            var currentWidthPercentage = maxWidthPercentage - ((week - 1) * (maxWidthPercentage / numWeeks));
-            console.log(currentWidthPercentage)
-            var divElement = document.getElementById('week-line');
-
-            divElement.style.width = currentWidthPercentage + '%';
-        }
-
         var numWeeks = 13;
         var startDate = new Date(2023, 3, 1); // May is month 4 in JavaScript Date (zero-based)
         var currentDate = new Date(); // Current date
+        var parentDiv = document.getElementById('week-line'); // Parent div element to append
 
         // Calculate the number of weeks passed since the start date
         var timeDiff = Math.abs(currentDate.getTime() - startDate.getTime());
         var numWeeksPassed = Math.ceil(timeDiff / (1000 * 60 * 60 * 24 * 7));
-        console.log(numWeeksPassed)
+        document.getElementById('week').innerText = `Week ${numWeeksPassed}`
+
+        // Append a div for each week that has not yet been completed
+        for (var week = 1; week <= numWeeks; week++) {
+            if (week > numWeeksPassed) {
+                var childDiv = document.createElement('div');
+                parentDiv.appendChild(childDiv);
+                
+            }
+        }
 
         // Adjust the width of the div for each week
         for (var week = 1; week <= numWeeks; week++) {
             if (week <= numWeeksPassed) {
-                document.getElementById('week').innerText = `Week ${numWeeksPassed}`
                 adjustDivWidth(week);
             }
         }
