@@ -1,0 +1,103 @@
+:root {
+  --color: rgb(0  , 164, 133);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+p {
+  margin: 1rem 0;
+}
+
+body {
+  font-size: 16px;
+  font-family: 'Inter', sans-serif;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 1rem 0 1rem 0;
+}
+
+.div {
+  margin: 1rem 0;
+}
+
+.fileUpload {
+  margin: 2rem 0 2rem 0;
+  text-align: center;
+}
+
+input[type="file"]{
+  display: none;
+}
+
+button {
+  font-weight: bold;
+  padding: .75rem 1.35rem;
+  background-color: var(--color);
+  color: white;
+  border-radius: 5px;
+  border: 0;
+  font-size: 16px;
+}
+
+.custom-file-upload {
+  font-weight: bold;
+  padding: .75rem 1.35rem;
+  background-color: var(--color);
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.instructions {
+  text-align: center;
+  display: none;
+}
+
+textarea {
+  font-size: 16px;
+  width: 100%;
+  resize: vertical;
+  padding: 8px;
+}
+
+#time-editor {
+  text-align: center;
+  margin: 2rem 0;
+}
+
+#number {
+  border: 2px solid var(--color);
+  font-size: 18px;
+  padding: .75rem 1.2rem;
+  border-radius: 5px;
+  width: 118px;
+  margin: 0 .2rem;
+}
+
+.arrow-button {
+  background-color: var(--color);
+  font-size: 16px;
+  padding: .75rem 1.5rem;
+  border-radius: 5px;
+  color: white;
+  font-weight: bold;
+}
+
+.download-area {
+  text-align: center;
+}
+
+.download-area button {
+  margin: 1rem 0;
+}
+
+#inputFileNameToSaveAs {
+  padding: .75rem 1rem;
+  margin: 0 .5rem;
+  border: 1px solid black;
+  border-radius: 5px;
+}
+
