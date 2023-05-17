@@ -16,8 +16,19 @@
     </style>
    
 </head>
-<body style="background: linear-gradient(20deg, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0), black);">
-    <h2 style="float: right; font-size: 4vw; color: white;">Hello world!!!</h2>
-
+<body style="background: linear-gradient(20deg, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0), rgb(52, 90, 139));">
+    <h2 id="date" style="float: right; font-size: 3vw; color: white; margin: .5vw 1vw 0 0;"></h2>
+    <script>
+        var currentDate = new Date();
+        var options = { 
+            year: 'numeric', 
+            month: 'long', 
+            day: 'numeric' 
+        };
+        var formattedDate = currentDate.toLocaleDateString('en-US', options);
+        
+        document.getElementById('date').innerText = formattedDate          
+    </script>
 </body>
+
 </html>
