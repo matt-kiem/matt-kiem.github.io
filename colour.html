@@ -55,7 +55,7 @@
    
 </head>
 <body id="body" class="gradient">
-    <div id="week-line"></div>
+    <!-- <div id="week-line"></div> -->
     <p id="week"></p>
     <p id="date"></p>
     
@@ -87,30 +87,26 @@
        //detectDeviceType();
     
         var numWeeks = 13;
-        var startDate = new Date(2023, 3, 1); // May is month 4 in JavaScript Date (zero-based)
+        var startDate = new Date(2023, 7, 31); // May is month 4 in JavaScript Date (zero-based)
         var currentDate = new Date(); // Current date
         var parentDiv = document.getElementById('week-line'); // Parent div element to append
 
         // Calculate the number of weeks passed since the start date
-        var timeDiff = Math.abs(currentDate.getTime() - startDate.getTime());
+        var timeDiff1 = Math.abs(currentDate.getTime() - startDate.getTime());
+        console.log(timeDiff1)
+        var timeDiff = currentDate.getTime() - startDate.getTime();
+        console.log(timeDiff)
         var numWeeksPassed = Math.ceil(timeDiff / (1000 * 60 * 60 * 24 * 7));
-        document.getElementById('week').innerText = `Week ${numWeeksPassed}`
+        if (numWeeksPassed < numWeeks) document.getElementById('week').innerText = `Week ${numWeeksPassed}`
 
         // Append a div for each week that has not yet been completed
-        for (var week = 1; week <= numWeeks; week++) {
-            if (week > numWeeksPassed) {
-                var childDiv = document.createElement('div');
-                parentDiv.appendChild(childDiv);
+        // for (var week = 1; week <= numWeeks; week++) {
+        //     if (week > numWeeksPassed) {
+        //         var childDiv = document.createElement('div');
+        //         parentDiv.appendChild(childDiv);
                 
-            }
-        }
-
-        // Adjust the width of the div for each week
-        for (var week = 1; week <= numWeeks; week++) {
-            if (week <= numWeeksPassed) {
-                adjustDivWidth(week);
-            }
-        }
+        //     }
+        // }
               
     </script>
 </body>
