@@ -39,21 +39,11 @@
             font-weight: bold;
         }
 
-        #week-line {
-            display: flex; 
-            justify-content: flex-end;
-            align-items: stretch;
-            gap: 3px;
-        }
-
-        #week-line > div {
-            background-color: rgb(255, 140, 0);
-            height: clamp(4px,.35vw, 5px);
-            width: 7.69%
-        }
-
         #flag {
+            position: absolute;
+            top:0;
             width: 100%;
+
         }
     </style>
    
@@ -62,7 +52,9 @@
     <!-- <div id="week-line"></div> -->
     <p id="week"></p>
     <p id="date"></p>
-    <svg id="flag" xmlns="http://www.w3.org/2000/svg" width="1000" height="600" viewBox="0 0 10 6"><rect width="10" height="6" fill="#c00"/><rect width="10" height="3"/><circle cx="5" cy="3" r="1.5" fill="#ff0"/></svg>
+    <svg id="flag" xmlns="http://www.w3.org/2000/svg" width="1000" height="600" viewBox="0 0 10 6"><rect width="10" height="6" fill="#c00"/>
+        <!-- <rect width="10" height="3"/><circle cx="5" cy="3" r="1.5" fill="#ff0"/> -->
+    </svg>
     
     <script>
         var currentDate = new Date();
