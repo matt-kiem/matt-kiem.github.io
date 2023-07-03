@@ -91,13 +91,17 @@
 
         // Calculate the number of weeks passed since the start date
         var timeDiff1 = Math.abs(currentDate.getTime() - startDate.getTime());
-        console.log(timeDiff1)
+        //console.log(timeDiff1)
         var timeDiff = currentDate.getTime() - startDate.getTime();
-        console.log(timeDiff)
+        //console.log(timeDiff)
         var numWeeksPassed = Math.ceil(timeDiff / (1000 * 60 * 60 * 24 * 7));
         if (numWeeksPassed < numWeeks) document.getElementById('week').innerText = `Week ${numWeeksPassed}`
 
-              
+        const storage = localStorage.getItem("test");
+        console.log(storage)
+        if(!storage) localStorage.setItem("test", currentDate);
+        console.log(storage)
+
     </script>
 </body>
 
