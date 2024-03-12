@@ -1,1 +1,1 @@
-export function hi() {console.log('hello from github 👋')}
+function hi() {console.log('hello from github 👋')}
