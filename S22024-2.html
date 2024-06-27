@@ -88,7 +88,7 @@
     const getWeekName = (weekNumber) => { 
       if (weekNumber < 0) {
         
-        return `it is <span class='text' style='${style}'>${dayName} of the ${getOrdinalSuffix(weekNumber)} week before Semester.</span> ⏳`;
+        return `it is the <span class='text' style='${style}'>${getOrdinalSuffix(weekNumber)} week before Semester 2.</span> ⏳`;
       } else if (weekNumber >= 18) {
         return `it is <span class='text' style='${style}'>after Semester has finished.</span> ⌛️`;
       } else {
@@ -134,8 +134,9 @@
     function getOrdinalSuffix(number) {
         const suffixes = ["th", "st", "nd", "rd"];
         const value = number % 100;
-
-        return (number*-1) + (suffixes[(value - 20) % 10] || suffixes[value] || suffixes[0]);
+        let result = (number*-1) + (suffixes[(value - 20) % 10] || suffixes[value] || suffixes[0])
+        if(result === '1st') result = 'last'
+        return result;
     }
     
     
@@ -156,8 +157,7 @@
         if(h2>360) h2 = h2 - 360
         console.log(num, numberToAdd, h1, h2)
         style = `background-image: linear-gradient(45deg, hsl(${h1}, 100%, 45%) 0, hsl(${h2}, 90%, 45%) 100%)`
-      }
-      
+      }     
     }
     colour(weekNumber)
     const weekName = getWeekName(weekNumber);
