@@ -88,45 +88,45 @@
     const getWeekName = (weekNumber) => { 
       if (weekNumber < 0) {
         
-        return `it is the <span class='text' style='${style}'>${getOrdinalSuffix(weekNumber)} week before Semester 2.</span> ⏳`;
+        return `it is the <span class='text' style='${style}'>${getOrdinalSuffix(weekNumber)} week before Semester 2</span> ⏳`;
       } else if (weekNumber >= 18) {
-        return `it is <span class='text' style='${style}'>after Semester has finished.</span> ⌛️`;
+        return `it is <span class='text' style='${style}'>after Semester has finished</span> ⌛️`;
       } else {
       switch (weekNumber) {
         case 1:
-          return `it is <span class='text' style='${style}'> ${dayName} of Week 1.</span> 🌱`;
+          return `it is <span class='text' style='${style}'> ${dayName} of Week 1</span> 🌱`;
         case 2:
-          return `it is <span class='text' style='${style}'> ${dayName} of Week 2.</span> 📚`;
+          return `it is <span class='text' style='${style}'> ${dayName} of Week 2</span> 📚`;
         case 3:
-          return `it is <span class='text' style='${style}'> ${dayName} of Week 3.</span> 🧑‍💻`;
+          return `it is <span class='text' style='${style}'> ${dayName} of Week 3</span> 🧑‍💻`;
         case 4:
-          return `it is <span class='text' style='${style}'> ${dayName} of Week 4.</span> ✍️`;
+          return `it is <span class='text' style='${style}'> ${dayName} of Week 4</span> ✍️`;
         case 5:
-          return `it is <span class='text' style='${style}'> ${dayName} of Week 5.</span> 🎯`;
+          return `it is <span class='text' style='${style}'> ${dayName} of Week 5</span> 🎯`;
         case 6:
-          return `it is <span class='text' style='${style}'> ${dayName} of Week 6.</span> 📊`;
+          return `it is <span class='text' style='${style}'> ${dayName} of Week 6</span> 📊`;
         case 7:
-          return `it is <span class='text' style='${style}'> ${dayName} of Week 7.</span> 🔬`; // depending on when the Semester Recess is, you may need to change the text in the quotation marks
+          return `it is <span class='text' style='${style}'> ${dayName} of Week 7</span> 🔬`; // depending on when the Semester Recess is, you may need to change the text in the quotation marks
         case 8:
-          return `it is <span class='text' style='${style}'> ${dayName} of Week 8.</span> 📝`; // depending on when the Semester Recess is, you may need to change the text in the quotation marks
+          return `it is <span class='text' style='${style}'> ${dayName} of Week 8</span> 📝`; // depending on when the Semester Recess is, you may need to change the text in the quotation marks
         case 9:
-          return `it is <span class='text' style='${style}'> ${dayName} of Week 9.</span> 🧑‍🏫`; // depending on when the Semester Recess is, you may need to change the text in the quotation marks
+          return `it is <span class='text' style='${style}'> ${dayName} of Week 9</span> 🧑‍🏫`; // depending on when the Semester Recess is, you may need to change the text in the quotation marks
         case 10:
-          return `it is <span class='text' style='${style}'> ${dayName} of Mid-semester break.</span> 🏖`; // depending on when the Semester Recess is, you may need to change the text in the quotation marks
+          return `it is <span class='text' style='${style}'> ${dayName} of Mid-semester break</span> 🏖`; // depending on when the Semester Recess is, you may need to change the text in the quotation marks
         case 11:
-          return `it is <span class='text' style='${style}'> ${dayName} of Week 10.</span> 🏫`;
+          return `it is <span class='text' style='${style}'> ${dayName} of Week 10</span> 🏫`;
         case 12:
-          return `it is <span class='text' style='${style}'> ${dayName} of Week 11.</span> 📓`;
+          return `it is <span class='text' style='${style}'> ${dayName} of Week 11</span> 📓`;
         case 13:
-          return `it is <span class='text' style='${style}'> ${dayName} of Week 12.</span> 📖`;
+          return `it is <span class='text' style='${style}'> ${dayName} of Week 12</span> 📖`;
         case 14:
-          return `it is <span class='text' style='${style}'> ${dayName} of Week 13.</span> 🌻`;
+          return `it is <span class='text' style='${style}'> ${dayName} of Week 13</span> 🌻`;
         case 15:
-          return `it is <span class='text' style='${style}'> ${dayName} of STUVAC.</span> 📑`;
+          return `it is <span class='text' style='${style}'> ${dayName} of STUVAC</span> 📑`;
         case 16:
-          return `it is <span class='text' style='${style}'> ${dayName} of Week 1 of the Exam Period.</span> 💯`;
+          return `it is <span class='text' style='${style}'> ${dayName} of Week 1 of the Exam Period</span> 💯`;
         case 17:
-          return `it is <span class='text' style='${style}'> ${dayName} of Week 2 of the Exam Period.</span> 💯`;
+          return `it is <span class='text' style='${style}'> ${dayName} of Week 2 of the Exam Period</span> 💯`;
         }
       }
     };
