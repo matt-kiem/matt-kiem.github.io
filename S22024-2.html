@@ -28,7 +28,7 @@
     id="week-display"></h2> 
   <script> // [N.B: if you want to change how the box and text looks in terms of styling, do so in the line above]
 
-    const semesterStartDate = new Date("2024-02-19T00:00:00+10:00"); // enter the start date of the Semester in AEDT or AEST
+    const semesterStartDate = new Date("2024-07-29T00:00:00+10:00"); // enter the start date of the Semester in AEDT or AEST
 
     const weekStartDates = [
       new Date("2024-07-29T00:00:00+10:00"), // enter the start date of Week One
@@ -53,13 +53,15 @@
 
     const getWeekNumber = (date) => {
       let weekNumber;
-      const time = date.getTime() - semesterStartDate.getTime();
-      if(date < weekStartDates[0]) weekNumber = -1; 
+      const weeks = Math.floor((date.getTime() - semesterStartDate.getTime())/604800000);
+      console.log(weeks)
+      //if(date < weekStartDates[0]) weekNumber = -1; 
       for(let i=0; i<18; i++){
         if(date >= weekStartDates[i] && date < weekStartDates[i+1]) {
           weekNumber = i+1;
         }
       } 
+      if(weeks < 0) weekNumber = weeks
       if(date > weekStartDates[17]) weekNumber = 18;
       return weekNumber;
     };
@@ -85,9 +87,10 @@
 
     const getWeekName = (weekNumber) => { 
       if (weekNumber < 0) {
-        return `it is <span class='text' style='${style}'>before Semester 2 has started.</span> ⏳`;
+        
+        return `it is <span class='text' style='${style}'>${dayName} of the ${getOrdinalSuffix(weekNumber)} week before Semester.</span> ⏳`;
       } else if (weekNumber >= 18) {
-        return `it is <span class='text' style='${style}'>after Semester 2 has finished.</span> ⌛️`;
+        return `it is <span class='text' style='${style}'>after Semester has finished.</span> ⌛️`;
       } else {
       switch (weekNumber) {
         case 1:
@@ -127,6 +130,13 @@
         }
       }
     };
+
+    function getOrdinalSuffix(number) {
+        const suffixes = ["th", "st", "nd", "rd"];
+        const value = number % 100;
+
+        return (number*-1) + (suffixes[(value - 20) % 10] || suffixes[value] || suffixes[0]);
+    }
     
     
     const options = {timeZone: "Australia/Sydney"};
@@ -140,7 +150,7 @@
     function colour(num) {
       if(num > 0 && num < 18) {
         const numberToAdd = 20*num
-        let h1 = 340 + numberToAdd
+        let h1 = 345 + numberToAdd
         let h2 = 240 + numberToAdd
         if(h1>360) h1 = h1 - 360
         if(h2>360) h2 = h2 - 360
