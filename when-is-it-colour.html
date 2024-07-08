@@ -135,7 +135,6 @@
     function getOrdinalSuffix(number) {
         const suffixes = ["th", "st", "nd", "rd"];
         const value = Math.abs(number % 100);
-        console.log(value)
         let result = (number*-1) + (suffixes[(value - 20) % 10] || suffixes[value] || suffixes[0])
         if(result === '1st') result = 'last'
         return result;
