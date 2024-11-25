@@ -55,7 +55,7 @@
     const getWeekNumber = (date) => {
       let weekNumber;
       const weeks = Math.floor((date.getTime() - semesterStartDate.getTime())/604800000);
-      console.log(weeks)
+      
       //if(date < weekStartDates[0]) weekNumber = -1; 
       for(let i=0; i<18; i++){
         if(date >= weekStartDates[i] && date < weekStartDates[i+1]) {
@@ -63,7 +63,8 @@
         }
       } 
       if(weeks < 0) weekNumber = weeks
-      if(date > weekStartDates[17]) weekNumber = 18;
+      if(date >= weekStartDates[17]) weekNumber = 18;
+      console.log(weekNumber)
       return weekNumber;
     };
 
@@ -87,6 +88,7 @@
     }
 
     const getWeekName = (weekNumber) => { 
+      console.log(weekNumber)
       if (weekNumber < 0) {
         
         return `it is the <span class='text' style='${style}'>${getOrdinalSuffix(weekNumber)} week before Semester 2</span> ⏳`;
