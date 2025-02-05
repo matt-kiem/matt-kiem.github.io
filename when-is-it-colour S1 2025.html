@@ -1,19 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Semester Week</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Semester Week</title>
 
-  <style>
-    .text {
-      color: transparent;
-      background-clip: text;
-      -webkit-background-clip: text;
-      /* background-image: linear-gradient(45deg, rgb(255, 59, 150) 0, rgb(48, 158, 255) 100%); */
-    }
-  </style>
+    <style>
+        .text {
+            color: transparent;
+            background-clip: text;
+            -webkit-background-clip: text;
+            /* background-image: linear-gradient(45deg, rgb(255, 59, 150) 0, rgb(48, 158, 255) 100%); */
+        }
+    </style>
 </head>
 
 <body style="text-align: center;">
@@ -25,7 +24,9 @@
     text-align: center; 
     font-family: 'Lato', sans-serif;
     color: #2d3b45;
-    font-size: clamp(1.2rem, 2.9vw, 1.4rem);" id="week-display"></h2>
+    font-size: clamp(1.2rem, 2.9vw, 1.4rem);"
+    
+    id="week-display"></h2> 
   <script> // [N.B: if you want to change how the box and text looks in terms of styling, do so in the line above]
 
     const semesterStartDate = new Date("2024-07-29T00:00:00+10:00"); // enter the start date of the Semester in AEDT or AEST
@@ -53,16 +54,16 @@
 
     const getWeekNumber = (date) => {
       let weekNumber;
-      const weeks = Math.floor((date.getTime() - semesterStartDate.getTime()) / 604800000);
-
+      const weeks = Math.floor((date.getTime() - semesterStartDate.getTime())/604800000);
+      
       //if(date < weekStartDates[0]) weekNumber = -1; 
-      for (let i = 0; i < 18; i++) {
-        if (date >= weekStartDates[i] && date < weekStartDates[i + 1]) {
-          weekNumber = i + 1;
+      for(let i=0; i<18; i++){
+        if(date >= weekStartDates[i] && date < weekStartDates[i+1]) {
+          weekNumber = i+1;
         }
-      }
-      if (weeks < 0) weekNumber = weeks
-      if (date >= weekStartDates[17]) weekNumber = 18;
+      } 
+      if(weeks < 0) weekNumber = weeks
+      if(date >= weekStartDates[17]) weekNumber = 18;
       console.log(weekNumber)
       return weekNumber;
     };
@@ -86,80 +87,80 @@
       }
     }
 
-    const getWeekName = (weekNumber) => {
+    const getWeekName = (weekNumber) => { 
       console.log(weekNumber)
       if (weekNumber < 0) {
-
+        
         return `it is the <span class='text' style='${style}'>${getOrdinalSuffix(weekNumber)} week before Semester 2</span> ⏳`;
       } else if (weekNumber >= 18) {
         return `it is <span class='text' style='${style}'>after Semester has finished</span> ⌛️`;
       } else {
-        switch (weekNumber) {
-          case 1:
-            return `it is <span class='text' style='${style}'> ${dayName} of Week 1</span> 🌱`;
-          case 2:
-            return `it is <span class='text' style='${style}'> ${dayName} of Week 2</span> 📚`;
-          case 3:
-            return `it is <span class='text' style='${style}'> ${dayName} of Week 3</span> 🧑‍💻`;
-          case 4:
-            return `it is <span class='text' style='${style}'> ${dayName} of Week 4</span> ✍️`;
-          case 5:
-            return `it is <span class='text' style='${style}'> ${dayName} of Week 5</span> 🎯`;
-          case 6:
-            return `it is <span class='text' style='${style}'> ${dayName} of Week 6</span> 📊`;
-          case 7:
-            return `it is <span class='text' style='${style}'> ${dayName} of Week 7</span> 🔬`; // depending on when the Semester Recess is, you may need to change the text in the quotation marks
-          case 8:
-            return `it is <span class='text' style='${style}'> ${dayName} of Week 8</span> 📝`; // depending on when the Semester Recess is, you may need to change the text in the quotation marks
-          case 9:
-            return `it is <span class='text' style='${style}'> ${dayName} of Mid-semester break</span> 🏖`; // depending on when the Semester Recess is, you may need to change the text in the quotation marks
-          case 10:
-            return `it is <span class='text' style='${style}'> ${dayName} of Week 9</span> 🧑‍🏫`; // depending on when the Semester Recess is, you may need to change the text in the quotation marks
-          case 11:
-            return `it is <span class='text' style='${style}'> ${dayName} of Week 10</span> 🏫`;
-          case 12:
-            return `it is <span class='text' style='${style}'> ${dayName} of Week 11</span> 📓`;
-          case 13:
-            return `it is <span class='text' style='${style}'> ${dayName} of Week 12</span> 📖`;
-          case 14:
-            return `it is <span class='text' style='${style}'> ${dayName} of Week 13</span> 🌻`;
-          case 15:
-            return `it is <span class='text' style='${style}'> ${dayName} of STUVAC</span> 📑`;
-          case 16:
-            return `it is <span class='text' style='${style}'> ${dayName} of Week 1 of the Exam Period</span> 💯`;
-          case 17:
-            return `it is <span class='text' style='${style}'> ${dayName} of Week 2 of the Exam Period</span> 💯`;
+      switch (weekNumber) {
+        case 1:
+          return `it is <span class='text' style='${style}'> ${dayName} of Week 1</span> 🌱`;
+        case 2:
+          return `it is <span class='text' style='${style}'> ${dayName} of Week 2</span> 📚`;
+        case 3:
+          return `it is <span class='text' style='${style}'> ${dayName} of Week 3</span> 🧑‍💻`;
+        case 4:
+          return `it is <span class='text' style='${style}'> ${dayName} of Week 4</span> ✍️`;
+        case 5:
+          return `it is <span class='text' style='${style}'> ${dayName} of Week 5</span> 🎯`;
+        case 6:
+          return `it is <span class='text' style='${style}'> ${dayName} of Week 6</span> 📊`;
+        case 7:
+          return `it is <span class='text' style='${style}'> ${dayName} of Week 7</span> 🔬`; // depending on when the Semester Recess is, you may need to change the text in the quotation marks
+        case 8:
+          return `it is <span class='text' style='${style}'> ${dayName} of Week 8</span> 📝`; // depending on when the Semester Recess is, you may need to change the text in the quotation marks
+        case 9:
+          return `it is <span class='text' style='${style}'> ${dayName} of Mid-semester break</span> 🏖`; // depending on when the Semester Recess is, you may need to change the text in the quotation marks
+        case 10:
+          return `it is <span class='text' style='${style}'> ${dayName} of Week 9</span> 🧑‍🏫`; // depending on when the Semester Recess is, you may need to change the text in the quotation marks
+        case 11:
+          return `it is <span class='text' style='${style}'> ${dayName} of Week 10</span> 🏫`;
+        case 12:
+          return `it is <span class='text' style='${style}'> ${dayName} of Week 11</span> 📓`;
+        case 13:
+          return `it is <span class='text' style='${style}'> ${dayName} of Week 12</span> 📖`;
+        case 14:
+          return `it is <span class='text' style='${style}'> ${dayName} of Week 13</span> 🌻`;
+        case 15:
+          return `it is <span class='text' style='${style}'> ${dayName} of STUVAC</span> 📑`;
+        case 16:
+          return `it is <span class='text' style='${style}'> ${dayName} of Week 1 of the Exam Period</span> 💯`;
+        case 17:
+          return `it is <span class='text' style='${style}'> ${dayName} of Week 2 of the Exam Period</span> 💯`;
         }
       }
     };
 
     function getOrdinalSuffix(number) {
-      const suffixes = ["th", "st", "nd", "rd"];
-      const value = Math.abs(number % 100);
-      let result = (number * -1) + (suffixes[(value - 20) % 10] || suffixes[value] || suffixes[0])
-      if (result === '1st') result = 'last'
-      return result;
+        const suffixes = ["th", "st", "nd", "rd"];
+        const value = Math.abs(number % 100);
+        let result = (number*-1) + (suffixes[(value - 20) % 10] || suffixes[value] || suffixes[0])
+        if(result === '1st') result = 'last'
+        return result;
     }
-
-
-    const options = { timeZone: "Australia/Sydney" };
+    
+    
+    const options = {timeZone: "Australia/Sydney"};
     const sydneyDate = new Intl.DateTimeFormat("en-US", options).format(new Date());
     const currentDate = new Date(sydneyDate);
     const dayNumber = currentDate.getDay();
     const dayName = getDayName(dayNumber);
     const weekNumber = getWeekNumber(currentDate);
-
+    
     let style = 'background-image: linear-gradient(45deg, hsl(340, 100%, 61.57%) 0, hsl(208, 100%, 59.41%) 100%)'
     function colour(num) {
-      if (num > 0 && num < 18) {
-        const numberToAdd = 20 * num
+      if(num > 0 && num < 18) {
+        const numberToAdd = 20*num
         let h1 = 345 + numberToAdd
         let h2 = 240 + numberToAdd
-        if (h1 > 360) h1 = h1 - 360
-        if (h2 > 360) h2 = h2 - 360
+        if(h1>360) h1 = h1 - 360
+        if(h2>360) h2 = h2 - 360
         console.log(num, numberToAdd, h1, h2)
         style = `background-image: linear-gradient(45deg, hsl(${h1}, 100%, 45%) 0, hsl(${h2}, 90%, 45%) 100%)`
-      }
+      }     
     }
     colour(weekNumber)
     const weekName = getWeekName(weekNumber);
@@ -167,5 +168,4 @@
     document.getElementById("week-display").innerHTML = "When is it? Right now, " + weekName; // [N.B: if you want to change the text preceding the counter, do so here]
   </script>
 </body>
-
 </html>

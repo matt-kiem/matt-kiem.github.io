@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body id="body">
+
+
+
+
+</body>
+
+<script>
+    const topics = [
+        'Depression',
+        'Anxiety',
+        'Bipolar',
+        'Schizophrenia', 'Eating Disorders', 'Substance Use Disorders'
+    ]
+
+    const dates = [
+        'Monday 8am', 'Monday 10am', 'Monday 12md', 'Monday 2pm', 'Monday 4pm',
+        'Wednesday 8am', 'Wednesday 10am', 'Wednesday 12md'
+    ]
+
+    const body = document.getElementById('body')
+
+    for (const date of dates) {
+        for (const topic of topics) {
+            const s = document.createElement('span')
+            s.innerText = `${date} ${topic}`
+            const b = document.createElement('br')
+            body.appendChild(s)
+            body.appendChild(b)
+        }
+    }
+
+
+
+</script>
+
+</html>
