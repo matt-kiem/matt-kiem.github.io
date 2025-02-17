@@ -90,8 +90,7 @@
     const getWeekName = (weekNumber) => {
       console.log(weekNumber)
       if (weekNumber < 0) {
-
-        return `it is the <span class='text' style='${style}'>${getOrdinalSuffix(weekNumber)} week before Semester 2</span> ⏳`;
+        return `it is the <span class='text' style='${style}'>${getOrdinalSuffix(weekNumber)} week before Semester</span> ⏳`;
       } else if (weekNumber >= 18) {
         return `it is <span class='text' style='${style}'>after Semester has finished</span> ⌛️`;
       } else {
@@ -149,7 +148,7 @@
     const dayNumber = currentDate.getDay();
     const dayName = getDayName(dayNumber);
     const weekNumber = getWeekNumber(currentDate);
-
+    console.log("🐱", dayNumber,dayName, weekNumber)
     let style = 'background-image: linear-gradient(45deg, hsl(340, 100%, 61.57%) 0, hsl(208, 100%, 59.41%) 100%)'
     function colour(num) {
       if (num > 0 && num < 18) {
