@@ -191,8 +191,8 @@
             let adjustedL = l;
 
             while (contrastWithWhite(adjustedH, adjustedS, adjustedL) < minContrast && adjustedL > 0) {
-              adjustedL -= .5;               // darken slightly
-              adjustedS = Math.min(100, s + step * -0.8); // boost saturation slowly
+              adjustedL -= .1;               // darken slightly
+              adjustedS = Math.min(100, s + step * -0.2); // boost saturation slowly
               adjustedH = (h + step * .2) % 360;        // nudge hue slightly as it darkens
               step++;
             }
@@ -209,8 +209,8 @@
         hsl(${c2.h}, ${c2.s}%, ${c2.l}%) 100%)`;
         }
       }
-    colour(weekNumber)
-    //colour(13)
+    //colour(weekNumber)
+    colour(9)
     const weekName = getWeekName(weekNumber);
 
     document.getElementById("week-display").innerHTML = "When is it? Right now, " + weekName; // [N.B: if you want to change the text preceding the counter, do so here]
