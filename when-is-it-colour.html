@@ -184,16 +184,16 @@
             return ratio;
           }
 
-          function ensureContrast(h, s, l, minContrast = 4.5) {
+          function ensureContrast(h, s, l, minContrast = 4) {
             let step = 0;
             let adjustedH = h;
             let adjustedS = s;
             let adjustedL = l;
 
             while (contrastWithWhite(adjustedH, adjustedS, adjustedL) < minContrast && adjustedL > 0) {
-              adjustedL -= 1;               // darken slightly
-              adjustedS = Math.min(100, s + step * 0.5); // boost saturation slowly
-              adjustedH = (h + step * 0.3) % 360;        // nudge hue slightly as it darkens
+              adjustedL -= .5;               // darken slightly
+              adjustedS = Math.min(100, s + step * -0.8); // boost saturation slowly
+              adjustedH = (h + step * .2) % 360;        // nudge hue slightly as it darkens
               step++;
             }
 
@@ -210,6 +210,7 @@
         }
       }
     colour(weekNumber)
+    //colour(13)
     const weekName = getWeekName(weekNumber);
 
     document.getElementById("week-display").innerHTML = "When is it? Right now, " + weekName; // [N.B: if you want to change the text preceding the counter, do so here]
