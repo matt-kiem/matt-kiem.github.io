@@ -92,7 +92,9 @@
 
     const getWeekName = (weekNumber) => {
       console.log(weekNumber)
-      if (weekNumber < 0) {
+      if (weekNumber < -6) {
+        return `it is <span class='text' style='${style}'>after Semester has finished</span> ⌛️`;;
+      } else if (weekNumber < 0) {
         return `it is the <span class='text' style='${style}'>${getOrdinalSuffix(weekNumber)} week before Semester</span> ⏳`;
       } else if (weekNumber >= 18) {
         return `it is <span class='text' style='${style}'>after Semester has finished</span> ⌛️`;
